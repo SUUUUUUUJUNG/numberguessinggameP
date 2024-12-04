@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>숫자 맞추기 게임</title>
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+</head>
+<body>
+<div class="container">
+    <h1>숫자 맞추기 게임</h1>
+    <p>1에서 <span th:text="${numberRange}">100</span> 사이의 숫자를 맞춰보세요!</p>
+    <p>남은 시도 횟수: <span th:text="${remainingAttempts}">10</span></p>
+
+    <!-- 메시지 표시 -->
+    <p th:if="${message}" th:text="${message}" style="color: red;"></p>
+
+    <!-- 게임 입력 폼 -->
+    <form method="post" th:action="@{/guess}">
+        <label for="difficulty">난이도 선택:</label>
+        <select name="difficulty" id="difficulty">
+            <option value="easy">쉬움 (1~50)</option>
+            <option value="medium" selected>중간 (1~100)</option>
+            <option value="hard">어려움 (1~200)</option>
+        </select>
+        <br>
+        <input type="number" name="number" placeholder="숫자를 입력하세요" required>
+        <button type="submit">제출</button>
+    </form>
+
+    <!-- 게임 리셋 버튼 -->
+    <form method="get" th:action="@{/reset}">
+        <button type="submit">다시 시작하기</button>
+    </form>
+</div>
+</body>
+</html>
